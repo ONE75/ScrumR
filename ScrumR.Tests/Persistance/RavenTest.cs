@@ -42,4 +42,6 @@ namespace ScrumR.Tests.Persistance
             _session.Dispose();
         }
     }
+
+   
 }

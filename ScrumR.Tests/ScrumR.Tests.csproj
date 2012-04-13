@@ -67,7 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Persistance\BacklogItemPersistanceTests.cs" />
+    <Compile Include="Persistance\Indexes.cs" />
     <Compile Include="Persistance\RavenTest.cs" />
+    <Compile Include="Persistance\Setup.cs" />
+    <Compile Include="Persistance\SprintPersistanceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

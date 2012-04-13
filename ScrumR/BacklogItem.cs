@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace ScrumR
 {
-    public class BacklogItemId : IValueObject
-    {
-    }
-
     public class BacklogItem : IAggregateRoot
     {
         public string Id { get; set; }
@@ -16,34 +11,33 @@ namespace ScrumR
         public string Story { get; set; }
         public int StoryPoints { get; set; }
         public string Summary { get; set; }
-        public string Type { get; set; }
 
-        //// all tasks in for this BacklogItem
-        //public IList<Task> Tasks { get; set; }
+        private IList<Task> Tasks { get; set; }
 
-        //// references to other Aggregates
-        //public ProductId ProductId { get; set; }
-        //public ReleaseId ReleaseId { get; set; }
-        //public SprintId SprintId { get; set; }
+        public BacklogItem()
+        {
+            this.Tasks = new List<Task>();
+        }
+
+        public void ScheduleIn(Sprint sprint)
+        {
+            this.SprintId = sprint.Id;
+        }
+
+        public string SprintId { get; set; }
+
+        public string Owner { get; set; }
+
+        public void AddTask(Task task)
+        {
+            if (this.Tasks == null)
+                this.Tasks = new List<Task>();
+            this.Tasks.Add(task);
+        }
+
+        public bool HasTasks()
+        {
+            return this.Tasks.Any();
+        }
     }
-
-    //public class Task : IEntity
-    //{
-    //    public string Discription { get; set; }
-    //    public int HoursRemaining { get; set; }
-    //    public string Name { get; set; }
-    //    public string Volunteer { get; set; }
-    //}
-
-    //public class SprintId : IValueObject
-    //{
-    //}
-
-    //public class ReleaseId : IValueObject
-    //{
-    //}
-
-    //public class ProductId : IValueObject
-    //{
-    //}
 }

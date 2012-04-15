@@ -4,7 +4,6 @@ using NUnit.Framework;
 using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
 
-
 namespace ScrumR.Tests.Persistance
 {
     [TestFixture]
@@ -58,11 +57,8 @@ namespace ScrumR.Tests.Persistance
         [Test]
         public void Can_be_fetched_on_status()
         {
-            var allTasks = _session.Query<BacklogItem>().Where(bli => bli.Status == "Not done").Select(item => new { Count = 1 });
+            var allTasks = _session.Query<BacklogItem>().Where(bli => bli.Status == "Not done");
             Assert.IsTrue(allTasks.Count() > 8);
         }
-
     }
-
-
 }

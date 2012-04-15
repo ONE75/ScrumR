@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using NUnit.Framework;
-using Raven.Abstractions.Indexing;
+﻿using NUnit.Framework;
 using Raven.Client.Document;
 using Raven.Client.Indexes;
 
@@ -15,15 +13,4 @@ namespace ScrumR.Tests.Persistance
             IndexCreation.CreateIndexes(typeof(Search_BacklogItems).Assembly, DocumentStore);
         }     
     }
-
-    public class Search_BacklogItems : AbstractIndexCreationTask<BacklogItem>
-    {
-        public Search_BacklogItems()
-        {
-            Map = backlogitems => from backlogItem in backlogitems
-                                  select new { backlogItem.Story };
-            Index(x => x.Story, FieldIndexing.Analyzed);
-        }
-    }
-
 }

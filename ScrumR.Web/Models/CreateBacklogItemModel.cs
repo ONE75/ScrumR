@@ -5,7 +5,7 @@ namespace ScrumR.Web.Models
     public class CreateBacklogItemModel
     {
         [Required]
-        [Display(Description = "Typically in the format 'As a user of ScrumR I want to DoSomething so I have A Benifit'")]
+        [Display(Description = "Typically in the format 'As a user of ScrumR I want to do something'")]
         public string Story { get; set; }
 
         [Required]

@@ -9,27 +9,15 @@
 		@Html.ValidationSummary(true)
 	</div>
 }
-<h2>CreateBacklogItem</h2>
 @using (Html.BeginForm())
 {
-
     <h2>Create a Backlog Item</h2>
+    
     <fieldset>
-        <legend>something here</legend>
+        <legend>Details</legend>
 
         @Html.EditorForModel()
     </fieldset>
-   @* <fieldset>
-        <legend>Payment</legend>
-        <p>We're running a promotion: all music is free with the promo code: "FREE"</p>
-
-        <div class="editor-label">
-            @Html.Label("Promo Code")
-        </div>
-        <div class="editor-field">
-            @Html.TextBox("PromoCode")
-        </div>
-    </fieldset>*@
-
-    <input type="submit" value="Submit Order" />
+  
+    <input type="submit" value="Save" />
 }

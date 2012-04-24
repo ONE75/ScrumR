@@ -64,10 +64,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Initializer.cs" />
     <Compile Include="Controllers\RavenController.cs" />
+    <Compile Include="Indexes\BacklogItemStatus_Count.cs" />
+    <Compile Include="Indexes\BacklogItems_FullTextSearchOnStory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ScrumR\ScrumR.csproj">
+      <Project>{8BD4A62B-C2F5-4F64-9479-7DA5E7D3B9BB}</Project>
+      <Name>ScrumR</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

@@ -5,12 +5,12 @@ using Raven.Client.Indexes;
 namespace ScrumR.Tests.Persistance
 {
     [TestFixture]
-    public class Indexes : RavenTest
+    public class Create_Indexes : RavenTest
     {
         [Test]
         public void CreateIndexes()
         {
-            IndexCreation.CreateIndexes(typeof(Search_BacklogItems).Assembly, DocumentStore);
+            IndexCreation.CreateIndexes(typeof(BacklogItems_FullTextSearchOnStory).Assembly, DocumentStore);
         }     
     }
 }

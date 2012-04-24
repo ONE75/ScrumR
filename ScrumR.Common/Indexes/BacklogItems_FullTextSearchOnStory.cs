@@ -4,12 +4,13 @@ using Raven.Client.Indexes;
 
 namespace ScrumR.Tests.Persistance
 {
-    public class Search_BacklogItems : AbstractIndexCreationTask<BacklogItem>
+    public class BacklogItems_FullTextSearchOnStory : AbstractIndexCreationTask<BacklogItem>
     {
-        public Search_BacklogItems()
+        public BacklogItems_FullTextSearchOnStory()
         {
             Map = backlogitems => from backlogItem in backlogitems
                                   select new { backlogItem.Story };
+            
             Index(x => x.Story, FieldIndexing.Analyzed);
         }
     }

@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace ScrumR.Tests.Persistance
 {
     [TestFixture]
-    public class Setup : RavenTest
+    public class InitializationTest : RavenTest
     {
         [Test]
         public void InsertSampleData()
@@ -40,8 +40,8 @@ namespace ScrumR.Tests.Persistance
                     .Build();
                 _session.Store(sprint);
 
-               sprintStartDate = sprintStartDate.AddDays(14);
-               sprintEndDate =  sprintEndDate.AddDays(14);
+                sprintStartDate = sprintStartDate.AddDays(14);
+                sprintEndDate = sprintEndDate.AddDays(14);
             }
         }
 

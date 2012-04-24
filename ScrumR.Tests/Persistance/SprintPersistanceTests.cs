@@ -18,6 +18,7 @@ namespace ScrumR.Tests.Persistance
         {
             var sprint = _session.Load<Sprint>(1);
             Assert.IsNotNull(sprint);
+            Assert.AreEqual("First sprint", sprint.Name);
         }
     }
 }

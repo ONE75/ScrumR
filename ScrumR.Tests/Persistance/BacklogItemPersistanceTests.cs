@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using NUnit.Framework;
-using Raven.Abstractions.Indexing;
-using Raven.Client.Indexes;
 
 namespace ScrumR.Tests.Persistance
 {
@@ -18,10 +15,20 @@ namespace ScrumR.Tests.Persistance
                 .OwnedBy("Stijn Volders")
                 .EstimatedStoryPoints(6)
                 .InStatus("Not done")
+                .AddingBusinessValue(BusinessValue.XL)
+                .WithEstimatedComplexity(Complexity.XL)
                 .Build();
 
             _session.Store(backlogItem);
             _session.SaveChanges();
+        }
+
+        [Test]
+        public void GetBacklogItemWithoutRequiredProperty()
+        {
+            var bli = _session.Load<BacklogItem>("backlogitems/1");
+            Assert.IsNotNull(bli);
+           _session.SaveChanges();
         }
 
         [Test]
@@ -44,21 +51,35 @@ namespace ScrumR.Tests.Persistance
             backLogItem.AddTask(task);
             _session.SaveChanges();
 
-            Assert.IsTrue(backLogItem.HasTasks());
+            Assert.IsTrue(backLogItem.HasTasks);
         }
 
         [Test]
-        public void Can_be_fetched()
+        public void Query()
         {
-            var allTasks = _session.Query<BacklogItem>();
-            Assert.IsTrue(allTasks.Count() > 8);
+            var allTasksCount = _session.Query<BacklogItem>().Count();
+            Assert.IsTrue(allTasksCount >= 8);
         }
 
         [Test]
-        public void Can_be_fetched_on_status()
+        public void Query_on_status()
         {
             var allTasks = _session.Query<BacklogItem>().Where(bli => bli.Status == "Not done");
-            Assert.IsTrue(allTasks.Count() > 8);
+            Assert.IsTrue(allTasks.Count() >= 8);
+        }
+
+        [Test]
+        public void Query_All_unassigned_items_via_property()
+        {
+            var allUnAssignedTasks = _session.Query<BacklogItem>().Where(bli => bli.SprintId == null);
+            Assert.IsNotNull(allUnAssignedTasks);
+        }
+
+        [Test]
+        public void Query_All_unassigned_items_via_wrapped_method()
+        {
+            var allUnAssignedTasks = _session.Query<BacklogItem>().Where(bli => bli.IsUnassigned).ToList();
+            Assert.IsNotNull(allUnAssignedTasks);
         }
     }
 }

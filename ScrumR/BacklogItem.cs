@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -19,6 +20,12 @@ namespace ScrumR
             this.Tasks = new List<Task>();
         }
 
+        public BacklogItem(string story)
+            : this()
+        {
+            this.Story = story;
+        }
+
         public void ScheduleIn(Sprint sprint)
         {
             this.SprintId = sprint.Id;
@@ -28,6 +35,8 @@ namespace ScrumR
 
         public string Owner { get; set; }
 
+        public BusinessValue BusinessValue { get; set; }
+
         public void AddTask(Task task)
         {
             if (this.Tasks == null)
@@ -35,9 +44,14 @@ namespace ScrumR
             this.Tasks.Add(task);
         }
 
-        public bool HasTasks()
+        public bool HasTasks
         {
-            return this.Tasks.Any();
+            get {return this.Tasks.Any();}
+        }
+
+        public bool IsUnassigned
+        {
+            get { return this.SprintId == null; }
         }
     }
 }

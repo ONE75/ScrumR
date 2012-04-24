@@ -1,4 +1,6 @@
-﻿namespace ScrumR
+﻿using System;
+
+namespace ScrumR
 {
     public class BacklogItemBuilder
     {
@@ -8,7 +10,9 @@
         private int _storyPoints;
         private string _summary;
         private string _owner;
-        
+        private BusinessValue _businessValue;
+        private Complexity _complexity;
+
         public BacklogItemBuilder ForStory(string story)
         {
             _story = story;
@@ -44,17 +48,29 @@
             _owner = owner;
             return this;
         }
+
+        public BacklogItemBuilder AddingBusinessValue(BusinessValue size)
+        {
+            _businessValue = size;
+            return this;
+        }
+
+        public BacklogItemBuilder WithEstimatedComplexity(Complexity complexity)
+        {
+            _complexity = complexity;
+            return this;
+        }
         
          public BacklogItem Build()
          {
-             var backlogItem = new BacklogItem()
+             var backlogItem = new BacklogItem(_story)
                                    {
                                        Id = _id,
                                        Status = _status,
-                                       Story = _story,
                                        StoryPoints = _storyPoints,
                                        Summary = _summary,
-                                       Owner = _owner
+                                       Owner = _owner,
+                                       BusinessValue = _businessValue
                                    };
              return backlogItem;
          }

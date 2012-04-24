@@ -72,7 +72,7 @@
     <Compile Include="Setup\InitializationTest.cs" />
     <Compile Include="Persistance\SprintPersistanceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queries\Class1.cs" />
+    <Compile Include="Queries\QueryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

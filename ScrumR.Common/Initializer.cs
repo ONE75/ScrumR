@@ -21,7 +21,7 @@ namespace ScrumR.Common
 
         public void CreateIndexes(IDocumentStore store)
         {
-            IndexCreation.CreateIndexes(typeof(BacklogItems_FullTextSearchOnStory).Assembly, store);
+            IndexCreation.CreateIndexes(typeof(BacklogItems_FullTextSearchOnStory).Assembly, store); 
         }
 
         private void AddBacklogItems()
@@ -36,7 +36,7 @@ namespace ScrumR.Common
             Store(BacklogItemForStory("As a user of ScrumR, I want to change the status of a SprintBacklogItem to Done"));
         }
 
-        private void AddSprints()
+        private void AddSprints() 
         {
             var sprintStartDate = new DateTime(2012, 4, 30);
             var sprintEndDate = sprintStartDate.AddDays(11);

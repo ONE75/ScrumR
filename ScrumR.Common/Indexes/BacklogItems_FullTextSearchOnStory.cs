@@ -2,7 +2,7 @@ using System.Linq;
 using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
 
-namespace ScrumR.Tests.Persistance
+namespace ScrumR.Tests.Persistance 
 {
     public class BacklogItems_FullTextSearchOnStory : AbstractIndexCreationTask<BacklogItem>
     {

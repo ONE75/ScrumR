@@ -4,7 +4,7 @@ using Raven.Client.Indexes;
 
 namespace ScrumR.Tests.Persistance
 {
-    public class BacklogItemStatus_Count : AbstractIndexCreationTask<BacklogItem, ReduceResult>
+    public class BacklogItemStatus_Count : AbstractIndexCreationTask<BacklogItem, ReduceResult> 
     {
         public BacklogItemStatus_Count()
         {

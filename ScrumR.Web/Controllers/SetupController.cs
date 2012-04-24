@@ -21,7 +21,7 @@ namespace ScrumR.Web.Controllers
         {
             var initializer = new Initializer();
             initializer.CreateIndexes(DocumentStore);
-            return "Done";
+            return "Done creating indexes";
         }
 
     }

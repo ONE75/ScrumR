@@ -43,7 +43,7 @@ namespace ScrumR.Tests.Persistance
             backLogItem.AddTask(task);
             _session.SaveChanges();
 
-            Assert.IsTrue(backLogItem.HasTasks);
+            Assert.IsTrue(backLogItem.HasTasks());
         }
     }
 }

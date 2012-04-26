@@ -4,7 +4,7 @@ using Raven.Client.Indexes;
 
 namespace ScrumR.Tests.Persistance
 {
-    public class BacklogItemStatus_Count : AbstractIndexCreationTask<BacklogItem, ReduceResult> 
+    public class BacklogItemStatus_Count : AbstractIndexCreationTask<BacklogItem, BacklogItemStatus_Count.ReduceResult> 
     {
         public BacklogItemStatus_Count()
         {
@@ -24,11 +24,11 @@ namespace ScrumR.Tests.Persistance
                                                    Occurrences = g.Sum(x => x.Occurrences)
                                                };
         }
-    }
 
-    public class ReduceResult // needed for compile time support. RavenDB does this as dynamic
-    {
-        public String Status { get; set; }
-        public int Occurrences { get; set; }
+        public class ReduceResult // needed for compile time support. RavenDB does this as dynamic
+        {
+            public String Status { get; set; }
+            public int Occurrences { get; set; }
+        }
     }
 }

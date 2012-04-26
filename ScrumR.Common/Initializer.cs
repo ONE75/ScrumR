@@ -26,14 +26,14 @@ namespace ScrumR.Common
 
         private void AddBacklogItems()
         {
-            Store(BacklogItemForStory("As a user of ScrumR, I want to see all BacklogItems"));
-            Store(BacklogItemForStory("As a user of ScrumR, I want to see all tasks that I own"));
-            Store(BacklogItemForStory("As a user of ScrumR, I want an overview with BacklogItems per status"));
-            Store(BacklogItemForStory("As a user of ScrumR, I want to see the total storypoints of remaining work"));
-            Store(BacklogItemForStory("As a user of ScrumR, I want to see all BacklogItems with a BusinessValue equal or higher than L (Large)"));
-            Store(BacklogItemForStory("As a user of ScrumR, I want to create tasks related to a BacklogItem"));
-            Store(BacklogItemForStory("As a user of ScrumR, I want to assign BacklogItems to a sprint"));
-            Store(BacklogItemForStory("As a user of ScrumR, I want to change the status of a SprintBacklogItem to Done"));
+            Store(BacklogItemForStory("As a user of ScrumR, I want to see all BacklogItems", BusinessValue.XL));
+            Store(BacklogItemForStory("As a user of ScrumR, I want to see all tasks that I own", BusinessValue.S));
+            Store(BacklogItemForStory("As a user of ScrumR, I want an overview with BacklogItems per status", BusinessValue.XL));
+            Store(BacklogItemForStory("As a user of ScrumR, I want to see the total storypoints of remaining work", BusinessValue.L));
+            Store(BacklogItemForStory("As a user of ScrumR, I want to see all BacklogItems with a BusinessValue equal or higher than L (Large)", BusinessValue.S));
+            Store(BacklogItemForStory("As a user of ScrumR, I want to create tasks related to a BacklogItem", BusinessValue.XL));
+            Store(BacklogItemForStory("As a user of ScrumR, I want to assign BacklogItems to a sprint", BusinessValue.XL));
+            Store(BacklogItemForStory("As a user of ScrumR, I want to change the status of a SprintBacklogItem to Done", BusinessValue.L));
         }
 
         private void AddSprints() 
@@ -54,14 +54,14 @@ namespace ScrumR.Common
             }
         }
 
-        private BacklogItem BacklogItemForStory(string story)
+        private BacklogItem BacklogItemForStory(string story, BusinessValue businessValue)
         {
             return new BacklogItemBuilder()
                 .ForStory(story)
                 .OwnedBy("Stijn Volders")
                 .EstimatedStoryPoints(4)
                 .InStatus("Not done")
-                .AddingBusinessValue(BusinessValue.XL)
+                .AddingBusinessValue(businessValue)
                 .WithEstimatedComplexity(Complexity.L)
                 .Build();
         }

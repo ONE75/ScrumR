@@ -9,19 +9,19 @@ namespace ScrumR
 
     public enum BusinessValue
     {
-        XL,
-        L,
-        M,
-        S,
-        XS
+        XL = 5,
+        L = 4,
+        M = 3,
+        S = 2,
+        XS = 1
     }
 
     public enum Complexity
     {
-        XL,
-        L,
-        M,
-        S,
-        XS
+        XL = 5,
+        L = 4,
+        M = 3,
+        S = 2,
+        XS = 1
     }
 }

@@ -44,14 +44,14 @@ namespace ScrumR
             this.Tasks.Add(task);
         }
 
-        public bool HasTasks
+        public bool HasTasks()
         {
-            get {return this.Tasks.Any();}
+            return this.Tasks.Any();
         }
 
-        public bool IsUnassigned
+        public bool IsImportant()
         {
-            get { return this.SprintId == null; }
+            return BusinessValue == BusinessValue.L || BusinessValue == BusinessValue.XL;
         }
     }
 }

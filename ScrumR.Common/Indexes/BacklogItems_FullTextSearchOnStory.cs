@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
 
@@ -12,6 +15,13 @@ namespace ScrumR.Tests.Persistance
                                   select new { backlogItem.Story };
             
             Index(x => x.Story, FieldIndexing.Analyzed);
+
+            // todo: add custom analyser for this index
+        }
+
+        public class Result
+        {
+            public string Story { get; set; }
         }
     }
 }

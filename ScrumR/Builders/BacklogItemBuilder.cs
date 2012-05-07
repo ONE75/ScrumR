@@ -10,7 +10,7 @@ namespace ScrumR
         private int _storyPoints;
         private string _summary;
         private string _owner;
-        private BusinessValue _businessValue;
+        private BusinessValue _businessValue = BusinessValue.XL;
         private Complexity _complexity;
 
         public BacklogItemBuilder ForStory(string story)

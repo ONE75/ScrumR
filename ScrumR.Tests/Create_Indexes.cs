@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using Raven.Client.Document;
 using Raven.Client.Indexes;
+using ScrumR.Tests.Persistance;
 
-namespace ScrumR.Tests.Persistance
+namespace ScrumR.Tests
 {
     [TestFixture]
     public class Create_Indexes : RavenTest

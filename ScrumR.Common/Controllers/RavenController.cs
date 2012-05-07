@@ -25,6 +25,9 @@ namespace ScrumR.Common.Controllers
                     {
                         Url = "http://localhost:8080"
                     }.Initialize();
+
+                    _store.Conventions.SaveEnumsAsIntegers = true;
+                  //  Raven.Client.MvcIntegration.RavenProfiler.InitializeFor(_store);
                 }
                 return _store;
             }

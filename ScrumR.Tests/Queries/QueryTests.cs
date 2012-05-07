@@ -50,12 +50,6 @@ namespace ScrumR.Tests.Queries
         }
 
         [Test]
-        public void Total_storypoints_of_remaining_work()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Test]
         public void All_backlogItems_with_a_BusinessValue_equal_or_higher_than_Large()
         {
             var importantBacklogItems = _session.Query<BacklogItem>().Where(bli => bli.BusinessValue >= BusinessValue.L);
@@ -75,22 +69,56 @@ namespace ScrumR.Tests.Queries
         public void All_backlogItems_that_are_important()
         {
             // will throw an exception because methods are not supported
-            var importantBacklogItems = _session.Query<BacklogItem>().Where(bli=> bli.IsImportant()).ToList();
-            
+            var importantBacklogItems = _session.Query<BacklogItem>().Where(bli => bli.IsImportant()).ToList();
+
         }
 
         [Test]
         public void Seach_BacklogItems_by_a_word_in_the_story()
         {
-            var searchTerm = "scrumr";
+            var searchTerm = "scrumr"; // TODO: change this in a less frequent term
 
-            var results = _session.Query<BacklogItems_FullTextSearchOnStory.Result, BacklogItems_FullTextSearchOnStory>()
+            var results = _session.Query<BacklogItems_FullTextSearchOnStory.Query, BacklogItems_FullTextSearchOnStory>()
                 .Where(x => x.Story == searchTerm)
                 .As<BacklogItem>()
                 .ToList();
 
             OutputBacklogItems("Matched the search term '" + searchTerm + "'", results);
-        }   
+        }
+
+        [Test]
+        public void BacklogItem_paging_with_total_count()
+        {
+            RavenQueryStatistics statistics;
+            var result = _session.Query<BacklogItem>()
+                .Statistics(out statistics)
+                .Take(5)
+                .ToList();
+            var listCount = result.Count;
+            var totalCount = statistics.TotalResults;
+
+            Assert.AreEqual(5, listCount);
+
+            Debug.WriteLine("{0} backlogitems match the requested query", totalCount);
+        }
+
+        [Test]
+        public void All_BacklogItems_ordered_by_Story()
+        {
+            RavenQueryStatistics stats;
+            var query = _session.Query<BacklogItem>()
+                .Statistics(out stats)
+                .Where(x=> x.Story != "")
+                .OrderBy(x => x.Story);
+
+            Debug.WriteLine("Query: " + query.ToString());
+
+            var results = query.ToList();
+
+
+            OutputBacklogItems("Ordered BacklogItems", results);
+            Debug.WriteLine("Used index: " + stats.IndexName);
+        }
 
         private void OutputBacklogItems(string queryDescription, IEnumerable<BacklogItem> backlogItems)
         {
@@ -101,5 +129,23 @@ namespace ScrumR.Tests.Queries
             }
             Debug.WriteLine("");
         }
+
+        [Test]
+        public void testname()
+        {
+            var newTestItem = new TestItem()
+                                  {
+                                      TestValue = "boehoe"
+                                  };
+            _session.Store(newTestItem);
+            _session.SaveChanges();
+        }
+    }
+
+    public class TestItem
+    {
+        public string TestValue { get; set; }
+
+        
     }
 }

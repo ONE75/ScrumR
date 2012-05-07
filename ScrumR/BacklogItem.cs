@@ -13,7 +13,7 @@ namespace ScrumR
         public int StoryPoints { get; set; }
         public string Summary { get; set; }
 
-        private IList<Task> Tasks { get; set; }
+        public IList<Task> Tasks { get; set; }
 
         public BacklogItem()
         {
@@ -42,11 +42,6 @@ namespace ScrumR
             if (this.Tasks == null)
                 this.Tasks = new List<Task>();
             this.Tasks.Add(task);
-        }
-
-        public bool HasTasks()
-        {
-            return this.Tasks.Any();
         }
 
         public bool IsImportant()

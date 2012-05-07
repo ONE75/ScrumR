@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "CreateBacklogItem";
 }
+        @Raven.Client.MvcIntegration.RavenProfiler.CurrentRequestSessions()
 @if (ViewData.ModelState.IsValid == false)
 { 
 	<div>

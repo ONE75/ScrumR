@@ -4,16 +4,13 @@ namespace ScrumR
 {
     public class Task
     {
-        public string TaskId { get; set; }
         public string Description { get; set; }
-        public int HoursRemaining { get; set; }
+        public int EstimatedHours { get; set; }
         public string Name { get; set; }
-        public string Volunteer { get; set; }
-        public string BacklogItemId { get; set; }
-
-        public Task(string backlogItemId)
+        public string Owner { get; set; }
+        
+        public Task()
         {
-            this.BacklogItemId = backlogItemId;
         }
     }
 }

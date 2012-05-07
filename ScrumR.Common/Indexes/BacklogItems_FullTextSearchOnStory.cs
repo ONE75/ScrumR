@@ -15,11 +15,24 @@ namespace ScrumR.Tests.Persistance
                                   select new { backlogItem.Story };
             
             Index(x => x.Story, FieldIndexing.Analyzed);
-
-            // todo: add custom analyser for this index
         }
 
-        public class Result
+        public class Query
+        {
+            public string Story { get; set; }
+        }
+    }
+
+    public class BacklogItems_IndexOnStory : AbstractIndexCreationTask<BacklogItem>
+    {
+        public BacklogItems_IndexOnStory()
+        {
+            Map = backlogitems => from backlogItem in backlogitems
+                                  select new { backlogItem.Story };
+
+        }
+
+        public class Query
         {
             public string Story { get; set; }
         }

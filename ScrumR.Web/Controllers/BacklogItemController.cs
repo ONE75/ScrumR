@@ -47,7 +47,8 @@ namespace ScrumR.Web.Controllers
 
                 RavenSession.Store(backlogItem);
 
-                return RedirectToAction("Index");
+                return View(); // show the statistics
+                //return RedirectToAction("Index");
             }
             catch
             {

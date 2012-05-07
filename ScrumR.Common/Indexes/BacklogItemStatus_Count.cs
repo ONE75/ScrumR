@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
 
 namespace ScrumR.Tests.Persistance

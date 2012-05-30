@@ -29,7 +29,7 @@ namespace ScrumR.Tests.Persistance
         [Test]
         public void BacklogItem_can_be_scheduled_in_sprint()
         {
-            var sprint = _session.Load<Sprint>(33);
+            var sprint = _session.Load<Sprint>(1);
             if (sprint == null)
                 throw new NullReferenceException("Sprint not found!");
 
@@ -38,6 +38,24 @@ namespace ScrumR.Tests.Persistance
             backLogItem.ScheduleIn(sprint);
 
             _session.SaveChanges();
+        }
+
+      
+
+        [Test]
+        public void BacklogItem_with_sprint()
+        {
+            var backlogItemWithSprint = _session
+                .Include<BacklogItem>(bli => bli.SprintId)
+                .Load<BacklogItem>(1);
+                
+            var sprint = _session.Load<Sprint>(backlogItemWithSprint.SprintId);
+
+            Assert.IsNotNull(backlogItemWithSprint);
+            Assert.IsNotNull(sprint);
+            var requests = _session.Advanced.NumberOfRequests;
+            Assert.AreEqual(1, requests);
+
         }
 
         [Test]

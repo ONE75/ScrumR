@@ -24,8 +24,6 @@ namespace ScrumR.Tests.Persistance
                 _session.Store(test);
                 _session.SaveChanges();
 
-                Debug.WriteLine("sprint is stored");
-                 
                 throw new Exception("This is expected");
                 scope.Complete();
             }
@@ -45,7 +43,7 @@ namespace ScrumR.Tests.Persistance
                 _session.SaveChanges();
 
                 scope.Complete();
-                Debug.WriteLine("sprint is stored");
+                Debug.WriteLine("test is stored");
             }
         }
 

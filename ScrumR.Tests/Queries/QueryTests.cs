@@ -22,7 +22,10 @@ namespace ScrumR.Tests.Queries
         [Test]
         public void All_tasks_that_I_own()
         {
-            var backlogItemsOwnedByMe = _session.Query<BacklogItem>().Where(bli => bli.Owner == "Stijn Volders").ToList();
+            RavenQueryStatistics stats;
+            var backlogItemsOwnedByMe = _session.Query<BacklogItem>()
+                .Statistics(out stats)
+                .Where(bli => bli.Owner == "Stijn Volders").ToList();
             OutputBacklogItems("All BacklogItems owned by me", backlogItemsOwnedByMe);
         }
 
@@ -54,6 +57,7 @@ namespace ScrumR.Tests.Queries
         {
             var importantBacklogItems = _session.Query<BacklogItem>().Where(bli => bli.BusinessValue >= BusinessValue.L);
             var luceneQuery = importantBacklogItems.ToString();
+            OutputBacklogItems("Important backlogitems", importantBacklogItems);
             Assert.AreEqual(6, importantBacklogItems.Count());
         }
 
@@ -66,17 +70,9 @@ namespace ScrumR.Tests.Queries
         }
 
         [Test]
-        public void All_backlogItems_that_are_important()
-        {
-            // will throw an exception because methods are not supported
-            var importantBacklogItems = _session.Query<BacklogItem>().Where(bli => bli.IsImportant()).ToList();
-
-        }
-
-        [Test]
         public void Seach_BacklogItems_by_a_word_in_the_story()
         {
-            var searchTerm = "scrumr"; // TODO: change this in a less frequent term
+            var searchTerm = "BusinessValue";
 
             var results = _session.Query<BacklogItems_FullTextSearchOnStory.Query, BacklogItems_FullTextSearchOnStory>()
                 .Where(x => x.Story == searchTerm)
@@ -84,6 +80,13 @@ namespace ScrumR.Tests.Queries
                 .ToList();
 
             OutputBacklogItems("Matched the search term '" + searchTerm + "'", results);
+        }
+
+        [Test]
+        public void QueryWithoutIndex()
+        {
+            var backlogitems = _session.Query<BacklogItem>().Where(bli => bli.Story.Contains("BusinessValue"));
+            OutputBacklogItems("QuerywithoutIndex", backlogitems);
         }
 
         [Test]
@@ -108,7 +111,6 @@ namespace ScrumR.Tests.Queries
             RavenQueryStatistics stats;
             var query = _session.Query<BacklogItem>()
                 .Statistics(out stats)
-                .Where(x=> x.Story != "")
                 .OrderBy(x => x.Story);
 
             Debug.WriteLine("Query: " + query.ToString());
@@ -129,23 +131,5 @@ namespace ScrumR.Tests.Queries
             }
             Debug.WriteLine("");
         }
-
-        [Test]
-        public void testname()
-        {
-            var newTestItem = new TestItem()
-                                  {
-                                      TestValue = "boehoe"
-                                  };
-            _session.Store(newTestItem);
-            _session.SaveChanges();
-        }
-    }
-
-    public class TestItem
-    {
-        public string TestValue { get; set; }
-
-        
     }
 }

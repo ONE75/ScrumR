@@ -25,6 +25,9 @@ namespace ScrumR.Tests.Persistance
                     {
                         Url = "http://localhost:8080"
                     }.Initialize();
+
+                   // _store.Conventions.SaveEnumsAsIntegers = true;
+
                 }
                 return _store;
             }
